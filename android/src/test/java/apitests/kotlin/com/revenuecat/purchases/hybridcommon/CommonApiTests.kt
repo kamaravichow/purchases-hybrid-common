@@ -209,7 +209,9 @@ private class CommonApiTests {
         dangerousSettings: DangerousSettings,
     ) {
         configure(context, apiKey, appUserID, observerMode, platformInfo)
-        configure(context, apiKey, appUserID, observerMode, platformInfo, store, dangerousSettings)
+        configure(context, apiKey, appUserID, observerMode, platformInfo, null)
+        configure(context, apiKey, appUserID, observerMode, platformInfo, "INFORMATIONAL", store, dangerousSettings)
+        configure(context, apiKey, appUserID, observerMode, platformInfo, "ENFORCED", store, dangerousSettings)
     }
 
     fun checkGetPromotionalOffer() {

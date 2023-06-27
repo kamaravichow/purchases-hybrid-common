@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.annotation.VisibleForTesting
 import com.revenuecat.purchases.CustomerInfo
 import com.revenuecat.purchases.DangerousSettings
+import com.revenuecat.purchases.EntitlementVerificationMode
 import com.revenuecat.purchases.LogLevel
 import com.revenuecat.purchases.ProductType
 import com.revenuecat.purchases.PurchaseParams
@@ -482,6 +483,7 @@ fun configure(
     appUserID: String?,
     observerMode: Boolean?,
     platformInfo: PlatformInfo,
+    verificationMode: String? = null,
     store: Store = Store.PLAY_STORE,
     dangerousSettings: DangerousSettings = DangerousSettings(autoSyncPurchases = true),
 ) {
@@ -493,6 +495,14 @@ fun configure(
             .dangerousSettings(dangerousSettings)
     if (observerMode != null) {
         builder.observerMode(observerMode)
+    }
+
+    if (verificationMode != null) {
+        try {
+            builder.verificationModeAndDiagnostics(EntitlementVerificationMode.valueOf(verificationMode))
+        } catch (e: IllegalArgumentException) {
+            warnLog("Attempted to configure with unknown verification mode: $verificationMode.")
+        }
     }
 
     Purchases.configure(builder.build())

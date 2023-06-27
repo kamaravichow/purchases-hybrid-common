@@ -181,8 +181,9 @@ class CommonApiTests {
                                 Store store,
                                 DangerousSettings dangerousSettings) {
         CommonKt.configure(context, apiKey, appUserId, observerMode, platformInfo);
-        CommonKt.configure(context, apiKey, appUserId, observerMode, platformInfo, store);
-        CommonKt.configure(context, apiKey, appUserId, observerMode, platformInfo, store, dangerousSettings);
+        CommonKt.configure(context, apiKey, appUserId, observerMode, platformInfo, null);
+        CommonKt.configure(context, apiKey, appUserId, observerMode, platformInfo, "INFORMATIONAL", store);
+        CommonKt.configure(context, apiKey, appUserId, observerMode, platformInfo, "ENFORCED", store, dangerousSettings);
     }
 
     private void checkGetPromotionalOffer() {
